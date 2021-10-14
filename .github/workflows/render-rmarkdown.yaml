@@ -7,9 +7,18 @@ name: render-rmarkdown
 
 jobs:
   render-rmarkdown:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: macOS-latest}
+          - {os: windows-latest}
+          - {os: ubuntu-latest}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
