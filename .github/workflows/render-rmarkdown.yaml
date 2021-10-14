@@ -20,7 +20,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r@v1
 
-      - uses: r-lib/actions/setup-renv@v1
+      - uses: milanmlft/setup-renv@fix-renv-path
 
       - name: Render Rmarkdown files
         run: |
