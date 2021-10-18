@@ -29,6 +29,11 @@ jobs:
 
       - uses: milanmlft/actions/setup-renv@fix-setup-renv
 
+      - name: Show renv cache path
+        run: |
+          Rscript -e "renv::paths$root()"
+          Rscript -e "renv::paths$cache()"
+
       # - name: Render Rmarkdown files
       #   run: |
       #     RMD_PATH=($(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '[.]Rmd$'))
