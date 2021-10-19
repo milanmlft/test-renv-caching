@@ -14,8 +14,8 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest}
-          # - {os: windows-latest}
-          # - {os: ubuntu-latest}
+          - {os: windows-latest}
+          - {os: ubuntu-latest}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
@@ -28,6 +28,8 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
 
       - uses: milanmlft/actions/setup-renv@fix-setup-renv
+        with:
+          cache-version: 2
 
       - name: Show renv cache path
         shell: Rscript {0}
