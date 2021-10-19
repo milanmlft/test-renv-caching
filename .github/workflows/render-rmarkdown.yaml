@@ -14,8 +14,8 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest}
-          - {os: windows-latest}
-          - {os: ubuntu-latest}
+          # - {os: windows-latest}
+          # - {os: ubuntu-latest}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
@@ -30,9 +30,17 @@ jobs:
       - uses: milanmlft/actions/setup-renv@fix-setup-renv
 
       - name: Show renv cache path
+        shell: Rscript {0}
         run: |
-          Rscript -e "renv::paths$root()"
-          Rscript -e "renv::paths$cache()"
+          Sys.getenv("RENV_PATHS_ROOT")
+          renv::paths$root()
+          renv::paths$cache()
+
+      - name: Show renv cache contents
+        shell: Rscript {0}
+        run: |
+          list.files(renv::paths$root())
+          list.files(renv::paths$cache())
 
       # - name: Render Rmarkdown files
       #   run: |
