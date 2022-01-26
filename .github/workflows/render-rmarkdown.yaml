@@ -46,7 +46,7 @@ jobs:
           path: |
             '*_cache'
             '*_files'
-          key: cache-version-${{ env.cache-version }}-knitr-${{ runner.os }}
+          key: cache-version-${{ env.cache-version }}-knitr-${{ runner.os }}-${{ hashFiles('**/*.Rmd')}}
           restore-keys: cache-version-${{ env.cache-version }}-knitr-
 
       - name: Render Rmarkdown files
