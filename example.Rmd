@@ -45,6 +45,12 @@ __Note that this should be used with caution, as caches may become invalid when 
 Sys.time()
 ```
 
+```{r, cache=TRUE}
+ggplot(pressure, aes(temperature, pressure)) +
+    geom_point()
+```
+
+
 
 ```{r}
 sessionInfo()
