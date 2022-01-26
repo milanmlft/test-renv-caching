@@ -5,6 +5,9 @@ on:
 
 name: render-rmarkdown
 
+env:
+  cache-version: 1
+
 jobs:
   render-rmarkdown:
     runs-on: ${{ matrix.config.os }}
@@ -31,18 +34,13 @@ jobs:
         with:
           cache-version: 2
 
-      - name: Show renv cache path
-        shell: Rscript {0}
-        run: |
-          Sys.getenv("RENV_PATHS_ROOT")
-          renv::paths$root()
-          renv::paths$cache()
-
-      - name: Show renv cache contents
-        shell: Rscript {0}
-        run: |
-          list.files(renv::paths$root())
-          list.files(renv::paths$cache())
+      - name: Cache knitr results
+        if: "!contains(github.event.head_commit.message, '/nocache')"
+        uses: actions/cache@v2
+        with:
+          path: '**/*_cache'
+          key: cache-version-${{ env.cache-version }}-knitr-${{ runner.os }}
+          restore-keys: cache-version-${{ env.cache-version }}-knitr-
 
       - name: Render Rmarkdown files
         run: |
