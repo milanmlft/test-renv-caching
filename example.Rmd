@@ -46,6 +46,7 @@ Sys.time()
 ```
 
 ```{r, cache=TRUE}
+## Run with caching enabled
 ggplot(pressure, aes(temperature, pressure)) +
     geom_point()
 ```
