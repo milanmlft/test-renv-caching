@@ -6,7 +6,7 @@ on:
 name: render-rmarkdown
 
 env:
-  cache-version: 2
+  cache-version: 3
 
 jobs:
   render-rmarkdown:
